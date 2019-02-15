@@ -9,12 +9,20 @@
 require 'json'
 require 'open-uri'
 
-url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
-cocktail_serialized = open(url).read
-cocktail = JSON.parse(cocktail_serialized)
 
-cocktail['drinks'].each do |drink|
-  Cocktail.create(name: drink['strIngredient1'])
+puts "Destroying db"
+
+Ingredient.destroy_all
+
+puts "Creating new cocktails"
+
+url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+ingredient_serialized = open(url).read
+ingredient = JSON.parse(ingredient_serialized)
+
+ingredient['drinks'].each do |drink|
+  Ingredient.create(name: drink['strIngredient1'])
 end
 
 
+puts "Finished"

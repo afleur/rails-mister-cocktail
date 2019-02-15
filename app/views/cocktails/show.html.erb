@@ -1,3 +1,25 @@
 <h1> <%=@cocktail.name  %>  </h1>
 
 <%= link_to "Back to list", cocktails_path %>
+
+
+
+
+<br> <br>
+<div>
+Ingredients:
+</div>
+
+<div>
+<% @cocktail.doses.each do |dose| %>
+  <li> <%= dose.description %>  | <%= dose.ingredient.name %>
+    <%= link_to dose_path(dose), method: :delete, data: { confirm: "yes or no?" } do %>
+      <i class= "fas fa-plus"></i>
+    <%end%> </li>
+<% end %>
+</div>
+
+<br>
+<%= link_to "Add an ingredient", new_cocktail_dose_path(@cocktail) %>
+<br><br>
+
