@@ -8,21 +8,39 @@
 
 require 'json'
 require 'open-uri'
+require 'nokogiri'
 
 
-puts "Destroying db"
+# puts "Destroying db"
 
-Ingredient.destroy_all
+# Ingredient.destroy_all
 
-puts "Creating new cocktails"
+# puts "Creating ingredients"
 
-url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
-ingredient_serialized = open(url).read
-ingredient = JSON.parse(ingredient_serialized)
+# url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+# ingredient_serialized = open(url).read
+# ingredient = JSON.parse(ingredient_serialized)
 
-ingredient['drinks'].each do |drink|
-  Ingredient.create(name: drink['strIngredient1'])
+# ingredient['drinks'].each do |drink|
+#   Ingredient.create(name: drink['strIngredient1'])
+# end
+
+
+# puts "Finished"
+
+
+
+url = "http://pexels.com/search/cocktails/"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.search('.photo-item__link img').each do |element|
+  image_url = element.attr('src')
+  if image_url =~ /^https?:\/\/(.*)/
+    Cocktail.create!(name: "Mojito", photo: image_url)
+    puts "created"
+  else
+    puts "not created"
+  end
 end
-
-
-puts "Finished"

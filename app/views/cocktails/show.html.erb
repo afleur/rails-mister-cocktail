@@ -3,9 +3,8 @@
 <%= link_to "Back to list", cocktails_path %>
 
 
-
-
 <br> <br>
+  <%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill %>
 <div>
 Ingredients:
 </div>
