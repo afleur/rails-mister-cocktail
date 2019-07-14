@@ -1,57 +1,40 @@
-<div class="navbar-wagon">
-
-</div>
-<div class="jumbotron jumbotron-fluid">
-<div class="container">
-<div class= "banner">
-<h1 class="display-4">>Cocktails & the city</h1>
-
-<p class="lead">'Why did we ever stop drinking these?
-Cause everyone else started'</p>
-</div>
-  </div>
-</div>
+<div class="navbar-wagon"> </div>
+  <div class="jumbotron jumbotron-fluid">
+      <div class= "banner">
+        <h1 class="display-4">Cocktails & the city</h1>
+          <p class="lead">'Why did we ever stop drinking these?
+              Cause everyone else started'</p>
+      </div>
+    </div>
 <div><%= link_to "Add a cocktail", new_cocktail_path %></div>
 
 <div class="container">
   <div class="row">
-  <% @cocktails.each do |cocktail| %>
-    <div class="col-xs-12 col-sm-4">
-    <img class="card-img-top" src="<%=cocktail.photo%>" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"><%= cocktail.name %></h5>
-      <%= link_to 'recipe', cocktail_path(cocktail)%>
-    </div>
-  <%end%>
-</div>
-
-
-<p id="notice"><%= notice %></p>
-
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= @garden.banner_url %>);">
-  <div class="banner-content">
-    <h1><%= @garden.name %></h1>
-  </div>
-</div>
-
-<%= link_to 'Edit', edit_garden_path(@garden) %> |
-<%= link_to 'Back', gardens_path %>
-
-<div class="container">
-  <div class="row">
-    <% @garden.plants.each do |plant| %>
-      <div class="col-xs-12 col-sm-4">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= plant.image_url %>);">
-          <div class="card-description">
-            <h2><%= plant.name %></h2>
+    <% @cocktails.each do |cocktail| %>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card">
+          <img class="card-img-top" src="<%=cocktail.photo%>" alt="Card image cap">
+          <div class="card-body">
+            <div class="card-title">
+              <% link_to cocktail_path(cocktail) do %>
+              <%= cocktail.name %>
+              <% end %>
           </div>
-          <%= link_to 'Destroy Plant', plant_path(plant), method: :delete, data: { confirm: "yes or no?" }, class: "card-link" %>
         </div>
+      </div>
       </div>
     <% end %>
   </div>
 </div>
 
-<div>
-  <%= link_to 'Plant a Plant', new_garden_plant_path(@garden) %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(https://unsplash.com/photos/MxfcoxycH_Y);">
+  <div class="banner-content">
+    <h1>Cocktails & the city</h1>
+  </div>
 </div>
+
+|
+<%= link_to 'Back', cocktails_path %>
